@@ -16,27 +16,31 @@ from .models import User
 
 def login_view(request):
     if request.method == "POST":
-
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
+
+        # Print the received username and password for debugging
+        print(f"Received username: {username}")
+        print(f"Received password: {password}")
+
         user = authenticate(request, username=username, password=password)
 
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("main"))
+            return HttpResponseRedirect(reverse('quizes/main'))
         else:
-            return render(request, "quizes/login.html", {
+            return render(request, 'quizes/login.html', {
                 "message": "Invalid username and/or password."
             })
     else:
-        return render(request, "quizes/login.html")
+        return render(request, 'quizes/login.html')
 
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("main"))
+    return HttpResponseRedirect(reverse('quizes/main'))
 
 
 def register(request):
@@ -48,7 +52,7 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "quizes/register.html", {
+            return render(request, 'quizes/register.html', {
                 "message": "Passwords must match."
             })
 
@@ -57,13 +61,13 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            return render(request, "quizes/register.html", {
+            return render(request, 'quizes/register.html', {
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("main"))
+        return HttpResponseRedirect(reverse('quizes/main'))
     else:
-        return render(request, "quizes/register.html")
+        return render(request, 'quizes/register.html')
     
 
 class QuizListView(ListView):

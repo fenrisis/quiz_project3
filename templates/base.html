@@ -30,8 +30,8 @@
                 <a href="{% url 'logout' %}">Log Out</a>
             {% else %}
                 <p>Not signed in.</p>
-                <a href="{% url 'login' %}">Log In</a>
-                <a href="{% url 'register' %}">Register</a>
+                <a href="{% url 'quizes:login' %}">Log In</a>
+                <a href="{% url 'quizes:register' %}">Register</a>
             {% endif %}
         {% endblock content %}
     </div>
