@@ -12,63 +12,41 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.db import IntegrityError
 from .models import User
+from .forms import createuserform
 
 
-def login_view(request):
-    if request.method == "POST":
-        # Attempt to sign user in
-        username = request.POST["username"]
-        password = request.POST["password"]
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('main') 
+    else: 
+        form=createuserform()
+        if request.method=='POST':
+            form=createuserform(request.POST)
+            if form.is_valid() :
+                user=form.save()
+                return redirect('login')
+        context={
+            'form':form,
+        }
+        return render(request,'quizes/register.html',context)
 
-        # Print the received username and password for debugging
-        print(f"Received username: {username}")
-        print(f"Received password: {password}")
-
-        user = authenticate(request, username=username, password=password)
-
-        # Check if authentication successful
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('main')
+    else:
+       if request.method=="POST":
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
         if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse('quizes/main'))
-        else:
-            return render(request, 'quizes/login.html', {
-                "message": "Invalid username and/or password."
-            })
-    else:
-        return render(request, 'quizes/login.html')
+            login(request,user)
+            return redirect('/')
+       context={}
+       return render(request,'quizes/login.html',context)
 
-
-def logout_view(request):
+def logoutPage(request):
     logout(request)
-    return HttpResponseRedirect(reverse('quizes/main'))
-
-
-def register(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        email = request.POST["email"]
-
-        # Ensure password matches confirmation
-        password = request.POST["password"]
-        confirmation = request.POST["confirmation"]
-        if password != confirmation:
-            return render(request, 'quizes/register.html', {
-                "message": "Passwords must match."
-            })
-
-        # Attempt to create new user
-        try:
-            user = User.objects.create_user(username, email, password)
-            user.save()
-        except IntegrityError:
-            return render(request, 'quizes/register.html', {
-                "message": "Username already taken."
-            })
-        login(request, user)
-        return HttpResponseRedirect(reverse('quizes/main'))
-    else:
-        return render(request, 'quizes/register.html')
-    
+    return redirect('/')
 
 class QuizListView(ListView):
     model = Quiz 
