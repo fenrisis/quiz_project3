@@ -17,7 +17,7 @@ from .forms import createuserform
 
 def registerPage(request):
     if request.user.is_authenticated:
-        return redirect('main') 
+        return redirect('/') 
     else: 
         form=createuserform()
         if request.method=='POST':
@@ -32,7 +32,7 @@ def registerPage(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('main')
+        return redirect('/')
     else:
        if request.method=="POST":
         username=request.POST.get('username')
