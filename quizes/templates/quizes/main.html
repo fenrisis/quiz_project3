@@ -31,36 +31,40 @@ home
 </div>
 
 <div class="container mt-3">
-    <div class="row">
-        <div class="col">
-            <!-- Login and Register links -->
-            <div>
-                <a href="{% url 'quizes:login' %}">Login</a>
-                <a href="{% url 'quizes:register' %}">Register</a>
-                <a href="{% url 'logout' %}">Logout</a>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col">
+      <!-- Login and Register links -->
+      <div>
+        {% if user.is_authenticated %}
+          <span class="greet">Hello, {{ user.username }}</span>
+          <span><a class="greet" href="{% url 'logout' %}">Logout</a></span>
+        {% else %}
+          <a href="{% url 'quizes:login' %}" class="greet">Login</a>
+          <a href="{% url 'quizes:register' %}" class="greet">Register</a>
+        {% endif %}
+      </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <h1>Quiz List</h1>
-            <hr>
-            {% for obj in object_list %}
-                <button
-                    class="btn btn-link modal-button"
-                    data-pk="{{obj.pk}}"
-                    data-quiz="{{obj.name}}"
-                    data-questions="{{obj.number_of_questions}}"
-                    data-difficulty="{{obj.difficulty}}"
-                    data-time="{{obj.time}}"
-                    data-pass="{{obj.required_score_to_pass}}"
-                    data-toggle="modal"
-                    data-target="#quizStartModal">
-                    {{obj.name}}
-                </button><br>
-            {% endfor %}
-        </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1>Quiz List</h1>
+      <hr>
+      {% for obj in object_list %}
+        <button
+          class="btn btn-link modal-button"
+          data-pk="{{ obj.pk }}"
+          data-quiz="{{ obj.name }}"
+          data-questions="{{ obj.number_of_questions }}"
+          data-difficulty="{{ obj.difficulty }}"
+          data-time="{{ obj.time }}"
+          data-pass="{{ obj.required_score_to_pass }}"
+          data-toggle="modal"
+          data-target="#quizStartModal">
+          {{ obj.name }}
+        </button><br>
+      {% endfor %}
     </div>
+  </div>
 </div>
 
 {% endblock content %}
