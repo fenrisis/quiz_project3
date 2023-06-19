@@ -52,7 +52,11 @@ class QuizListView(ListView):
     template_name = 'quizes/main.html'
 
 def quiz_view(request, pk):
-    quiz = Quiz.objects.get(pk=pk)
+    if pk == 'favicon.ico':
+        # Handle the favicon.ico request here
+        return HttpResponse(status=204)  # Return a blank response
+
+    quiz = get_object_or_404(Quiz, pk=pk)
     return render(request, 'quizes/quiz.html', {'obj': quiz})
 
 def quiz_data_view(request, pk):
