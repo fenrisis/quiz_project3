@@ -1,13 +1,16 @@
 console.log('hello world quiz')
 const url = window.location.href
 
+// Get the current URL and necessary elements from the DOM
 const quizBox = document.getElementById('quiz-box')
 const scoreBox = document.getElementById('score-box')
 const resultBox = document.getElementById('result-box')
 const timerBox = document.getElementById('timer-box')
 
 
+// Function to activate the timer
 const activateTimer = (time) => {
+     // Format and display the initial timer value
     if (time.toString().length < 2) {
         timerBox.innerHTML = `<b>0${time}:00</b>`
     } else {
@@ -20,11 +23,14 @@ const activateTimer = (time) => {
     let displayMinutes
 
     const timer = setInterval(()=>{
+        // Decrement seconds and minutes
         seconds --
         if (seconds < 0) {
             seconds = 59
             minutes --
         }
+
+        // Format minutes and seconds for display
         if (minutes.toString().length < 2) {
             displayMinutes = '0'+minutes
         } else {
@@ -35,6 +41,8 @@ const activateTimer = (time) => {
         } else {
             displaySeconds = seconds
         }
+
+        // Check if time is up and handle the end of the quiz
         if (minutes === 0 && seconds === 0) {
             timerBox.innerHTML = "<b>00:00</b>"
             setTimeout(()=>{
@@ -43,16 +51,19 @@ const activateTimer = (time) => {
                 sendData()
             }, 500)
         }
-
+        // Update the timer display
         timerBox.innerHTML = `<b>${displayMinutes}:${displaySeconds}</b>`
     }, 1000)
 }
 
+// Make an AJAX GET request to fetch quiz data
 $.ajax({
     type: 'GET',
     url: `${url}data`,
     success: function(response){
         const data = response.data
+        
+        // Iterate over the questions and answers and render them on the page
         data.forEach(el => {
             for (const [question, answers] of Object.entries(el)){
                 quizBox.innerHTML += `
@@ -71,6 +82,8 @@ $.ajax({
                 })
             }
         });
+
+        // Activate the timer with the specified time
         activateTimer(response.time)
         
     },
@@ -79,6 +92,8 @@ $.ajax({
     }
 })
 
+
+// Handle form submission
 const quizForm = document.getElementById('quiz-form')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
@@ -86,6 +101,8 @@ const sendData = () => {
     const elements = [...document.getElementsByClassName('ans')]
     const data = {}
     data['csrfmiddlewaretoken'] = csrf[0].value
+    
+    // Collect the user's answers and build the data object
     elements.forEach(el=>{
         if (el.checked) {
             data[el.name] = el.value
@@ -96,6 +113,7 @@ const sendData = () => {
         }
     })
 
+    // Make an AJAX POST request to save the quiz and display the results
     $.ajax({
         type: 'POST',
         url: `${url}save/`,
@@ -105,6 +123,7 @@ const sendData = () => {
             console.log(results)
             quizForm.classList.add('not-visible')
 
+            // Display the score and results on the page
             scoreBox.innerHTML = `${response.passed ? 'Congratulations! ' : 'Ups..:( '}Your result is ${response.score.toFixed(2)}%`
 
             results.forEach(res=>{
@@ -115,6 +134,7 @@ const sendData = () => {
                     const cls = ['container', 'p-3', 'text-light', 'h6']
                     resDiv.classList.add(...cls)
 
+                    // Handle different result scenarios
                     if (resp=='not answered') {
                         resDiv.innerHTML += '- not answered'
                         resDiv.classList.add('bg-danger')

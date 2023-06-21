@@ -14,6 +14,7 @@ from .models import User
 from .forms import createuserform
 
 
+# Register Page
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('/') 
@@ -29,6 +30,8 @@ def registerPage(request):
         }
         return render(request,'quizes/register.html',context)
 
+
+# Login Page
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('/')
@@ -43,14 +46,20 @@ def loginPage(request):
        context={}
        return render(request,'quizes/login.html',context)
 
+
+# Logout Page
 def logoutPage(request):
     logout(request)
     return redirect('/')
 
+
+# Quiz List View
 class QuizListView(ListView):
     model = Quiz 
     template_name = 'quizes/main.html'
 
+
+# Quiz View
 def quiz_view(request, pk):
     if pk == 'favicon.ico':
         # Handle the favicon.ico request here
@@ -59,6 +68,8 @@ def quiz_view(request, pk):
     quiz = get_object_or_404(Quiz, pk=pk)
     return render(request, 'quizes/quiz.html', {'obj': quiz})
 
+
+# Quiz Data View
 def quiz_data_view(request, pk):
     quiz = Quiz.objects.get(pk=pk)
     questions = []
@@ -72,6 +83,8 @@ def quiz_data_view(request, pk):
         'time': quiz.time,
     })
 
+
+# Save Quiz View (requires login)
 @login_required
 def save_quiz_view(request, pk):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -81,6 +94,8 @@ def save_quiz_view(request, pk):
 
         data_.pop('csrfmiddlewaretoken')
 
+        
+        # Extract the questions from the POST data
         for k in data_.keys():
             question = Question.objects.get(text=k)
             questions.append(question)
@@ -93,6 +108,8 @@ def save_quiz_view(request, pk):
         results = []
         correct_answer = None
 
+       
+       # Evaluate the user's answers and calculate the score
         for q in questions:
             a_selected = request.POST.get(q.text)
 
@@ -112,8 +129,11 @@ def save_quiz_view(request, pk):
                 results.append({str(q): 'not answered'})
 
         score_ = score * multiplier
+
+        # Save the quiz result to the database
         Result.objects.create(quiz=quiz, user=user, score=score_)
 
+        # Return the result as JSON response
         if score_ >= quiz.required_score_to_pass:
             return JsonResponse({'passed': True, 'score': score_, 'results': results})
         else:
