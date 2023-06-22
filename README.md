@@ -2,6 +2,10 @@
 
 This is a Quiz Application developed using Django and JavaScript. It allows users to register, log in, and take quizzes with multiple-choice questions. The application calculates the user's score, provides feedback on their answers, and determines if they have passed the quiz based on the set passing score.
 
+## Idea 
+
+Idea of this application is to create a platform for learning words and grammar
+
 ## Features
 
 - User Registration: Users can create an account to access the quiz functionality.
