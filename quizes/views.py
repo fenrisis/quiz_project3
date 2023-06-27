@@ -12,6 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.db import IntegrityError
 from .models import User
 from .forms import createuserform
+from django.db.models import Sum
 
 
 # Register Page
@@ -53,6 +54,15 @@ def logoutPage(request):
     return redirect('/')
 
 
+def leaderboard(request):
+    top_results = Result.objects.values('user__username').annotate(total_score=Sum('score')).order_by('-total_score')[:500]
+    total_count = top_results.count()
+    context = {
+        'top_results': top_results,
+        'total_count': total_count,
+    }
+    return render(request, 'quizes/leaderboard.html', context=context)
+
 # Quiz List View
 class QuizListView(ListView):
     model = Quiz 
@@ -64,6 +74,10 @@ def quiz_view(request, pk):
     if pk == 'favicon.ico':
         # Handle the favicon.ico request here
         return HttpResponse(status=204)  # Return a blank response
+
+    if pk == 'leaderboard':
+        # Handle the leaderboard request here
+        return leaderboard(request)
 
     quiz = get_object_or_404(Quiz, pk=pk)
     return render(request, 'quizes/quiz.html', {'obj': quiz})

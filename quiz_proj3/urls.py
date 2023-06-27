@@ -24,7 +24,8 @@ urlpatterns = [
     path('', include('quizes.urls', namespace='quizes')),
     path('login/', loginPage,name='login'),
     path('logout/', logoutPage,name='logout'),
-    path('register/', registerPage,name='register')
+    path('register/', registerPage,name='register'),
+    path('leaderboard/', leaderboard,name='leaderboard')
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
