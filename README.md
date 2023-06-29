@@ -49,36 +49,37 @@ Idea of this application is to create a platform for learning words and grammar
 - Django 4
 
 ## Directory Schema
-capstone/
-├── db.sqlite3                  # Database.
-├── manage.py
-├── quizes/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py               # Contains a User model & Quiz model.
-│   ├── templatetags/
-│   │   ├── __init__.py
-│   │   └── custom_filters.py   # This filter is used for the leaderboard page to round the score numbers.
-│   ├── tests.py                # Contains tests for your project, such as testing the quiz functionality.
-│   ├── urls.py                 # Contains URL mappings for your app.
-│   └── views.py                # The most important part of the MVC architecture - the controller that defines functions to display different views.
-├── questions/
-│   ├── __init__.py
-│   └── models.py               # Contains the models that represent questions and their data.
-├── results/
-│   ├── __init__.py
-│   └── models.py               # Contains the models that represent results and their data.
-├── static/
-│   └── quizes/
-│       └── js/
-│           ├── main.js         # This JavaScript file sets up click event listeners for modal buttons and a start button. It retrieves data attributes from the clicked button and uses them to populate a modal body. When the start button is clicked, it redirects the user to a quiz URL.
-│           └── quiz.js         # This JavaScript file sets up a quiz interface where users can answer questions within a specified time limit. It retrieves quiz data, renders the questions and answers on the page, starts a timer, and handles the submission of user answers to display the quiz results.
-├── templates/
-│   └── quizes/
-│       ├── base.html           # This template provides a base HTML structure and includes necessary CSS, JavaScript, and Django template tags for building a quiz app. Child templates can extend this base template and provide their own content within the {% block %} tags to customize the page.
-│       ├── main.html           # This template extends the base template, loads static files, includes a JavaScript file, and defines the content for the home page of a quiz app, including a modal for quiz confirmation and a list of quizzes with their respective buttons.
-│       ├── leaderboard.html    # This template extends the base template, loads static files, and displays a leaderboard table with the top players' positions, usernames, and scores. It also includes a "Go Back" button to return to the main view of the quiz.
-│       └── quiz.html           # This template extends the base template, loads static files, and represents the view for a specific quiz. It displays the quiz name, a timer, a "go back" button, a form for answering the quiz questions, and empty div elements for displaying the score and quiz results. The JavaScript file "quiz.js" is loaded to handle the quiz functionality on the client-side.
-└── README.md
+- capstone/
+  - db.sqlite3                  # Database.
+  - manage.py
+  - quizes/
+    - __init__.py
+    - admin.py
+    - apps.py
+    - models.py               # Contains a User model & Quiz model.
+    - templatetags/
+      - __init__.py
+      - custom_filters.py   # This filter is used for the leaderboard page to round the score numbers.
+    - tests.py                # Contains tests for your project, such as testing the quiz functionality.
+    - urls.py                 # Contains URL mappings for your app.
+    - views.py                # The most important part of the MVC architecture - the controller that defines functions to display different views.
+  - questions/
+    - __init__.py
+    - models.py               # Contains the models that represent questions and their data.
+  - results/
+    - __init__.py
+    - models.py               # Contains the models that represent results and their data.
+  - static/
+    - quizes/
+      - js/
+        - main.js         # This JavaScript file sets up click event listeners for modal buttons and a start button. It retrieves data attributes from the clicked button and uses them to populate a modal body. When the start button is clicked, it redirects the user to a quiz URL.
+        - quiz.js         # This JavaScript file sets up a quiz interface where users can answer questions within a specified time limit. It retrieves quiz data, renders the questions and answers on the page, starts a timer, and handles the submission of user answers to display the quiz results.
+  - templates/
+    - quizes/
+      - base.html           # This template provides a base HTML structure and includes necessary CSS, JavaScript, and Django template tags for building a quiz app. Child templates can extend this base template and provide their own content within the {% block %} tags to customize the page.
+      - main.html           # This template extends the base template, loads static files, includes a JavaScript file, and defines the content for the home page of a quiz app, including a modal for quiz confirmation and a list of quizzes with their respective buttons.
+      - leaderboard.html    # This template extends the base template, loads static files, and displays a leaderboard table with the top players' positions, usernames, and scores. It also includes a "Go Back" button to return to the main view of the quiz.
+      - quiz.html           # This template extends the base template, loads static files, and represents the view for a specific quiz. It displays the quiz name, a timer, a "go back" button, a form for answering the quiz questions, and empty div elements for displaying the score and quiz results. The JavaScript file "quiz.js" is loaded to handle the quiz functionality on the client-side.
+- README.md
+
 
