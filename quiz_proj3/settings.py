@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -102,6 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -124,6 +129,10 @@ STATICFILES_DIRS = [
     BASE_DIR /'quizes' /'static',
 ]
 
+LOGIN_URL = 'quizes:login'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+MESSAGE_LEVEL = messages.WARNING
+MESSAGE_UNAUTHENTICATED_USERS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

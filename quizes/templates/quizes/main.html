@@ -38,7 +38,7 @@ home
         {% if user.is_authenticated %}
           <span class="greet">Hello, {{ user.username }}</span>
           <span><a class="greet" href="{% url 'logout' %}">Logout</a></span>
-          <span><a class="greet"  href="{% url 'leaderboard' %}">leaderboard</a></span>
+          <span><a class="greet"  href="{% url 'leaderboard' %}">Leaderboard</a></span>
         {% else %}
           <a href="{% url 'quizes:login' %}" class="greet">Login</a>
           <a href="{% url 'quizes:register' %}" class="greet">Register</a>

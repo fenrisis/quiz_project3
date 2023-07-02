@@ -13,6 +13,8 @@ from django.db import IntegrityError
 from .models import User
 from .forms import createuserform
 from django.db.models import Sum
+from django.contrib import messages
+from django.urls import reverse
 
 
 # Register Page
@@ -101,6 +103,10 @@ def quiz_data_view(request, pk):
 # Save Quiz View (requires login)
 @login_required
 def save_quiz_view(request, pk):
+    if not request.user.is_authenticated:
+        messages.error(request, 'To get results, you need to be logged in')
+        return HttpResponseRedirect(reverse('quizes:login'))
+
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         questions = []
         data = request.POST

@@ -28,7 +28,7 @@
             {% if user.is_authenticated %}
                 <p>Signed in as <strong>{{ user.username }}</strong>.</p>
                 <a href="{% url 'logout' %}">Log Out</a>
-                <a href="{% url 'quizes:leaderboard' %}">leaderboard</a>
+                <a href="{% url 'quizes:leaderboard' %}">Leaderboard</a>
             {% else %}
                 <p>Not signed in.</p>
                 <a href="{% url 'quizes:login' %}">Log In</a>
