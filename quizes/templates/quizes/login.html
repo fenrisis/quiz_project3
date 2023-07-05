@@ -3,6 +3,11 @@
 {% load static%}
 {% block content %}
 <div class="container jumbotron">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
     <form method="POST" action="">
         {% csrf_token %}
         <p><input type="text" name="username" placeholder="Username..."></p>
