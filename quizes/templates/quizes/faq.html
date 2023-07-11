@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+FAQs - Serbian Quiz App
+{% endblock title %}
+
+{% block content %}
+<h1>Frequently Asked Questions</h1>
+
+<h2>Q:-I forgot my password and can't see the results </h2>
+<p>A:-Unfortunately, this is essentially an educational application and service pythonanywhere does not allow me to send emails. If you have such a problem, write to me by mail on <a href="mailto:antonfenrisis@gmail.com">antonfenrisis@gmail.com</a> or <a href="https://t.me/Leonid3">Telegram</a>.</p>
+
+
+<h2>About Web App</h2>
+<p>This is a Quiz Application developed using Django and JavaScript. It allows users to register, log in, and take quizzes with multiple-choice questions. The application calculates the user's score, provides feedback on their answers, and determines if they have passed the quiz based on the set passing score.</p>
+<p>Quiz Application allows administrators to create and manage quizzes with customizable multiple-choice questions, answers, and time limits. User authentication and authorization ensure secure access and tailored experiences. The dynamic quiz interface generates real-time updates, providing immediate feedback to users as they navigate through the quiz. A timer adds a sense of urgency, challenging users to complete the quiz within the allotted time. Score calculation and result analysis provide  feedback and determine pass/fail status based on the set passing score. Overall, our Quiz Application stands out with its distinctive features, including customizable quizzes, user authentication, dynamic interface, timer functionality, and comprehensive result analysis, creating a  engaging user experience.<p>
+<h2>Repository</h2>
+<p>Find the source code of that web app on GitHub:</p>
+<a href="https://github.com/fenrisis/quiz_project3">GitHub Repository</a>
+<a href="{% url 'quizes:main-view' %}" class="btn btn-primary">Back</a>
+
+{% endblock content %}

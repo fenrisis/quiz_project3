@@ -19,13 +19,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from quizes.views import *
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quizes.urls', namespace='quizes')),
-    path('login/', loginPage,name='login'),
-    path('logout/', logoutPage,name='logout'),
-    path('register/', registerPage,name='register'),
-    path('leaderboard/', leaderboard,name='leaderboard')
+    path('faq/', faq_view, name='faq'),
+    path('login/', loginPage, name='login'),
+    path('logout/', logoutPage, name='logout'),
+    path('register/', registerPage, name='register'),
+    path('leaderboard/', leaderboard, name='leaderboard'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

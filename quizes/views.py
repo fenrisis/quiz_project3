@@ -66,6 +66,9 @@ def leaderboard(request):
     }
     return render(request, 'quizes/leaderboard.html', context=context)
 
+def faq_view(request):
+    return render(request, 'quizes/faq.html')
+
 # Quiz List View
 class QuizListView(ListView):
     model = Quiz 
@@ -81,6 +84,10 @@ def quiz_view(request, pk):
     if pk == 'leaderboard':
         # Handle the leaderboard request here
         return leaderboard(request)
+    
+    if pk == 'faq':
+        # Handle the FAQs request here
+        return faq_view(request)
 
     quiz = get_object_or_404(Quiz, pk=pk)
     return render(request, 'quizes/quiz.html', {'obj': quiz})
