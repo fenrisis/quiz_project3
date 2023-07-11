@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block scripts %}
-    <script src="{% static 'quizes/main.js' %}" defer></script> 
+    <script src="{% static 'quizes/main.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}
@@ -37,25 +37,20 @@ home
       <div>
         {% if user.is_authenticated %}
           <span class="greet">Hello, {{ user.username }}</span>
-          <span><a class="greet" href="{% url 'logout' %}">Logout</a></span>
-          <span><a class="greet" href="{% url 'leaderboard' %}">Leaderboard</a></span>
-        {% else %}
-          <a href="{% url 'quizes:login' %}" class="greet">Login</a>
-          <a href="{% url 'quizes:register' %}" class="greet">Register</a>
         {% endif %}
       </div>
       {% if not user.is_authenticated %}
         <div class="alert alert-warning mt-3">
           To access quiz details and results, please
-          <a href="{% url 'quizes:login' %}">login</a> or
-          <a href="{% url 'quizes:register' %}">register</a>.
+          <a href="{% url 'quizes:login' %}">Login</a> or
+          <a href="{% url 'quizes:register' %}">Register</a>.
         </div>
       {% endif %}
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <h1>Quiz List</h1>
+      <h1>Serbian Quiz List</h1>
       <hr>
       {% for obj in object_list %}
         <button

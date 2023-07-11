@@ -24,18 +24,36 @@
   </head>
   <body>
     <div class="container mt-3">
-        {% block content %}
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Serbian Quiz App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
             {% if user.is_authenticated %}
-                <p>Signed in as <strong>{{ user.username }}</strong>.</p>
-                <a href="{% url 'logout' %}">Log Out</a>
-                <a href="{% url 'quizes:leaderboard' %}">Leaderboard</a>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'quizes:leaderboard' %}">Leaderboard</a>
+              </li>
             {% else %}
-                <p>Not signed in.</p>
-                <a href="{% url 'quizes:login' %}">Log In</a>
-                <a href="{% url 'quizes:register' %}">Register</a>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'quizes:login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'quizes:register' %}">Register</a>
+              </li>
             {% endif %}
-        {% endblock content %}
+          </ul>
+        </div>
+      </nav>
+      
+      {% block content %}
+      {% endblock content %}
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
