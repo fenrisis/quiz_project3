@@ -4,7 +4,7 @@ This is a Quiz Application developed using Django and JavaScript. It allows user
 
 ## Idea 
 
-Idea of this application is to create a platform for learning words and grammar
+Idea of this application is to create a platform for learning words and grammar.
 -Youtube  demo video :https://youtu.be/OKKF8vGlY_Q
 
 ## My Quiz Application project demonstrates distinctiveness and complexity in several ways, making it stand out from generic quiz applications. Here are the key aspects that highlight its distinctiveness and complexity:
@@ -17,9 +17,7 @@ Idea of this application is to create a platform for learning words and grammar
     Users can create accounts, log in, and access specific functionalities based on their roles.
     Administrators have additional privileges, such as creating quizzes and viewing quiz results.
     User authentication and authorization add complexity to the project, ensuring secure access and tailored experiences for different user groups.
-    Dynamic Quiz Interface:
-
--The quiz-taking interface  generates questions and answer options based on the selected quiz.
+- Dynamic Quiz Interface: The quiz-taking interface  generates questions and answer options based on the selected quiz.
     Users can navigate through the quiz, select answers, and receive immediate feedback.
     The dynamic nature of the quiz interface, with its real-time updates answers, enhances the user experience and showcases the project's complexity.
     Timer Functionality:
@@ -34,7 +32,7 @@ Idea of this application is to create a platform for learning words and grammar
     Users receive a final score and a pass/fail indication based on the set passing score for the quiz.
     The score calculation and result analysis components add complexity to the project, involving data processing and generating comprehensive feedback for users.
 
--Overall, our Quiz Application stands out in terms of distinctiveness and complexity due to its customizable quizzes, user authentication and authorization features, dynamic quiz interface, timer functionality, and score calculation with result analysis. These aspects combine to create a rich and engaging user experience, setting it apart from simpler and generic quiz applications.
+-Overall,  Quiz Application stands out in terms of distinctiveness and complexity due to its customizable quizzes, user authentication and authorization features, dynamic quiz interface, timer functionality, and score calculation with result analysis. These aspects combine to create a rich and engaging user experience, setting it apart from simpler and generic quiz applications.
 
 ## Usage
 - Register a new account or log in to an existing account.
@@ -60,7 +58,7 @@ Idea of this application is to create a platform for learning words and grammar
     - templatetags/
       - __init__.py
       - custom_filters.py   # This filter is used for the leaderboard page to round the score numbers.
-    - tests.py                # Contains tests for your project, such as testing the quiz functionality.
+    - tests.py                # Contains tests for project, such as testing the quiz functionality.
     - urls.py                 # Contains URL mappings for your app.
     - views.py                # The most important part of the MVC architecture - the controller that defines functions to display different views.
   - questions/
