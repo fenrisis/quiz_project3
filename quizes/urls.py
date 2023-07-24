@@ -1,16 +1,5 @@
 from django.urls import path
-from .views import (
-    QuizListView,
-    quiz_view,
-    quiz_data_view,
-    save_quiz_view,
-    registerPage,
-    loginPage,
-    logoutPage,
-    leaderboard,
-    faq_view,   
-)
-
+from .views import QuizListView, quiz_view, quiz_data_view, save_quiz_view, registerPage, loginPage, logoutPage, leaderboard, faq_view
 
 app_name = 'quizes'
 
@@ -19,9 +8,9 @@ urlpatterns = [
     path("login/", loginPage, name="login"),
     path("logout/", logoutPage, name="logout"),
     path("register/", registerPage, name="register"),
-    path('<pk>/', quiz_view, name='quiz-view'),
-    path('<pk>/save/', save_quiz_view, name='save-view'),
-    path('<pk>/data/', quiz_data_view, name='quiz-data-view'),
+    path('<int:pk>/', quiz_view, name='quiz-view'),  
+    path('<int:pk>/save/', save_quiz_view, name='save-view'),  
+    path('<int:pk>/data/', quiz_data_view, name='quiz-data-view'),  
     path('leaderboard/', leaderboard, name='leaderboard'),
     path('faq/', faq_view, name='faq'),
 ]
