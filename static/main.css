@@ -1,0 +1,32 @@
+
+.quiz-cards .card {
+    margin-bottom: 20px;
+  }
+  
+  /* Style the quiz card title */
+  .quiz-cards .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Style the quiz card details */
+  .quiz-cards .card-text {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the "Start Quiz" button */
+  .quiz-cards .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .quiz-cards .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .quiz-cards .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+  

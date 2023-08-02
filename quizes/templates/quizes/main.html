@@ -52,22 +52,28 @@ home
     <div class="col">
       <h1>Serbian Quiz List</h1>
       <hr>
-      {% for obj in object_list %}
-        <button
-          class="btn btn-link modal-button"
-          data-pk="{{ obj.pk }}"
-          data-quiz="{{ obj.name }}"
-          data-questions="{{ obj.number_of_questions }}"
-          data-difficulty="{{ obj.difficulty }}"
-          data-time="{{ obj.time }}"
-          data-pass="{{ obj.required_score_to_pass }}"
-          data-toggle="modal"
-          data-target="#quizStartModal">
-          {{ obj.name }}
-        </button><br>
-      {% endfor %}
+      <div class="row quiz-cards">
+        {% for obj in object_list %}
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ obj.name }}</h5>
+                <p class="card-text">Questions: {{ obj.number_of_questions }}</p>
+                <p class="card-text">Difficulty: {{ obj.difficulty }}</p>
+                <p class="card-text">Time: {{ obj.time }} minutes</p>
+                <p class="card-text">Passing Score: {{ obj.required_score_to_pass }}</p>
+                <a href="{% url 'quizes:quiz-view' obj.pk %}" class="btn btn-primary">Start Quiz</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
 
 {% endblock content %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+{% endblock css %}
