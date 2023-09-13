@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'quizes',
     'questions',
     'results',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

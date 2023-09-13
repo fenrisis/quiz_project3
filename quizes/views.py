@@ -9,8 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponse, HttpResponseRedirect
-from django.db import IntegrityError
-from .models import User
+from rest_framework import viewsets
+from .serializers import QuizSerializer, QuestionSerializer, AnswerSerializer
 from .forms import createuserform
 from django.db.models import Sum
 from django.contrib import messages
@@ -106,6 +106,21 @@ def quiz_data_view(request, pk):
         'data': questions,
         'time': quiz.time,
     })
+
+
+#serialize
+class QuizViewSet(viewsets.ModelViewSet):
+    queryset = Quiz.objects.all()
+    serializer_class = QuizSerializer
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
+class AnswerViewSet(viewsets.ModelViewSet):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+
 
 
 # Save Quiz View (requires login)
